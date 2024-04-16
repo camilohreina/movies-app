@@ -1,11 +1,13 @@
 import SearchBar from '../components/SearchBar';
 import MovieCard from '../components/MovieCard';
 import Capsule from '../components/Capsule';
+import LoginButton from '../components/LoginButton';
 import { movies, genres } from '../data/movies.json';
 
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center h-full w-full">
+      <LoginButton />
       <SearchBar />
       <div className="flex max-w-4xl w-full flex-row flex-wrap gap-4 justify-center my-16">
         {genres.map((genre) => (
