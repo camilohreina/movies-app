@@ -1,6 +1,8 @@
+import { Link } from 'wouter';
+
 export default function MovieCard({ movie }) {
   return (
-    <div className="relative ">
+    <Link href={`/movie/${movie.id}`} className="relative ">
       <img
         src={movie.posterUrl}
         alt="image"
@@ -12,6 +14,6 @@ export default function MovieCard({ movie }) {
           <span className="text-gray-300 text-xl font-bold">{movie.year}</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
