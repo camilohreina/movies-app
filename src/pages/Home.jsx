@@ -6,7 +6,7 @@ import { movies, genres } from '../data/movies.json';
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full">
+    <div className="container mx-auto flex flex-col items-center justify-center h-full w-full">
       <LoginButton />
       <SearchBar />
       <div className="flex max-w-4xl w-full flex-row flex-wrap gap-4 justify-center my-16">
@@ -15,7 +15,7 @@ export default function Home() {
         ))}
       </div>
 
-      <div className="flex flex-row my-16 flex-wrap w-full gap-8 items-center justify-center">
+      <div className=" flex flex-row my-16 flex-wrap w-full gap-8 items-center justify-center">
         {movies.slice(0, 10).map((movie, index) => (
           <MovieCard key={index} movie={movie} />
         ))}
