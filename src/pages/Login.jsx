@@ -1,15 +1,17 @@
+import { Link } from "wouter";
+
 export default function Login() {
   return (
-    <div className="flex flex-col justify-center">
-      <div>
-        <h1 className="text-white">Login</h1>
+    <div className="flex flex-col justify-center items-center m-1 p-8 ">
+      <div className="m-1 p-4 bg-transparent shadow-lg rounded border-2 w-1/2">
+        <h1 className="text-white font-bold text-center w-full" >Login</h1>
         <form className="max-w-lg">
           <div className="mb-6">
             <label
               htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white "
             >
-              Email address
+              Email
             </label>
             <input
               type="email"
@@ -33,6 +35,42 @@ export default function Login() {
               placeholder="•••••••••"
               required
             />
+          </div>
+          <div className="flex justify-between mt-4">
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                className="rounded text-blue-500 dark:text-blue-400 focus:ring-4 focus:ring-blue-500 dark:focus:ring-blue-500"
+              />
+              <span className="text-sm font-medium text-gray-900 dark:text-white">
+                Remember me
+              </span>
+            </label>
+            <Link
+              href="/forgot-password"
+              className="text-sm font-medium text-blue-500 dark:text-blue-400"
+            >
+              Forgot password?
+            </Link>
+          </div>
+          <div>
+              <button
+                type="submit"
+                className="bg-gradient-to-br from-purple-500 to-pink-500 text-white font-semibold text-sm rounded-lg py-2.5 w-full focus:outline-none focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 mt-4 mb-4"
+              >
+                Log In
+              </button>
+          </div>
+          <div className="max-w-lg text-center">
+            <p className="text-sm font-medium text-gray-900 dark:text-white">
+              Don't have an account yet?
+            <a
+              href="/Sign-Up" 
+              className="text-purple-500 hover:text-pink-500 font-semibold text-sm ml-2"
+            >
+            Sign Up
+            </a>
+            </p>
           </div>
         </form>
       </div>
