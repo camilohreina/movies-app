@@ -5,6 +5,7 @@ import SignUp from './pages/Sign-Up';
 import ForgotPassword from './pages/Forgot-password';
 
 import MovieDetail from './pages/MovieDetail';
+import Booking from './pages/Booking';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/sign-up" component={SignUp} />
       <Route path="/movie/:id" component={MovieDetail} />
       <Route path="/forgot-password" component={ForgotPassword} />
+      <Route path="/booking" component={Booking} />
     </div>
   );
 }
