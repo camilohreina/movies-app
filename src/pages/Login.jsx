@@ -1,7 +1,9 @@
 import { Link } from 'wouter';
+import BackButton from '../components/BackButton';
 
 export default function Login() {
-  return (
+  return (<>
+    <BackButton />
     <div className="flex flex-col justify-center items-center m-1 p-8 ">
       <div className="m-1 p-16 bg-transparent shadow-lg flex gap-8 my-4 justify-center flex-col items-center rounded border-2 border-gray-700 w-1/2">
         <h1 className="text-white text-3xl uppercase font-bold text-center w-full">
@@ -77,5 +79,6 @@ export default function Login() {
         </form>
       </div>
     </div>
+  </>
   );
 }
