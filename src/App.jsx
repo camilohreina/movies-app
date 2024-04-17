@@ -2,6 +2,7 @@ import { Route } from 'wouter';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import MovieDetail from './pages/MovieDetail';
+import Booking from './pages/Booking';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Route path="/" component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/movie/:id" component={MovieDetail} />
+      <Route path="/booking" component={Booking} />
     </div>
   );
 }
