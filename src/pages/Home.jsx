@@ -1,7 +1,7 @@
 import SearchBar from '../components/SearchBar';
 import MovieCard from '../components/MovieCard';
 import Capsule from '../components/Capsule';
-import LoginButton from '../components/LoginButton';
+import HeaderBar from '../components/HeaderBar';
 import { movies as AllMovies, genres } from '../data/movies.json';
 import { useState } from 'react';
 
@@ -25,7 +25,7 @@ export default function Home() {
   };
   return (
     <div className="container mx-auto flex flex-col items-center justify-center h-full w-full">
-      <LoginButton />
+      <HeaderBar showBackButton={false} />
       <SearchBar searchMovies={searchMoviesByName} />
       <div className="flex max-w-4xl w-full flex-row flex-wrap gap-4 justify-center my-16">
         {genres.map((genre) => (
