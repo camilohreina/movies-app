@@ -2,7 +2,7 @@ import { useParams } from 'wouter';
 import { movies } from '../data/movies.json';
 import AboutMovie from '../components/AboutMovie';
 import Schedule from '../components/Schedule';
-import BackButton from '../components/BackButton';
+import HeaderBar from '../components/HeaderBar';
 export default function MovieDetail() {
   const { id } = useParams();
 
@@ -10,7 +10,7 @@ export default function MovieDetail() {
   if (!movie) return <h1 className="text-white">Movie not found</h1>;
   return (
     <div className="flex gap-24 flex-col">
-      <BackButton />
+      <HeaderBar />
       <AboutMovie movie={movie} />
       <Schedule movie={movie} />
     </div>
