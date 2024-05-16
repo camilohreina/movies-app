@@ -16,6 +16,7 @@ function App() {
       <Route path="/movie/:id" component={MovieDetail} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/booking" component={Booking} />
+      {/* <Route path='/cart' component={Cart} /> */}
     </div>
   );
 }

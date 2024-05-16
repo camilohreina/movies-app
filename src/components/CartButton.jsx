@@ -11,6 +11,10 @@ export default function CartButton({ itemCount }) {
       type="button"
       className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-lg shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
     >
+    {/* <Link
+      href="/cart"
+      className="relative inline-flex place-items-start p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800"
+    > </Link> */}
       <svg
         className="w-6 h-6 text-gray-800 dark:text-white"
         aria-hidden="true"

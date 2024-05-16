@@ -1,19 +1,28 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CinemaRoom from '../components/CinemaRoom';
-import { movies } from '../data/movies.json';
+import { movies } from '../data/movies.json'; // Asegúrate de tener tus datos de películas aquí
 import { useSearch } from 'wouter';
 import HeaderBar from '../components/HeaderBar';
+// import Cart from '../components/Cart'; // Nuevo componente para el carrito
 
-export default function Booking() {
-  //const occupiedSeats = [3, 5, 10, 44, 55, 99, 87, 106]; // Indices of occupied seats
-  const [occupiedSeats, setOccupiedSeats] = useState([]); // Indices of occupied seats
+const Booking = () => {
+  const [occupiedSeats, setOccupiedSeats] = useState([]);
+  const [selectedSeats, setSelectedSeats] = useState([]); // Nuevo estado para sillas seleccionadas
   const queryString = useSearch();
   const [movieId, setMovieId] = useState('');
   const [time, setTime] = useState('');
 
   const handleSeatClick = (seatNumber) => {
     console.log(`Seat ${seatNumber} was clicked.`);
-    // Here you can implement logic to reserve or release the seat
+    // Aquí puedes implementar la lógica para reservar o liberar el asiento
+    // Por ejemplo, agregar o eliminar el asiento seleccionado en el estado selectedSeats
+    setSelectedSeats((prevSelectedSeats) => {
+      if (prevSelectedSeats.includes(seatNumber)) {
+        return prevSelectedSeats.filter((seat) => seat !== seatNumber);
+      } else {
+        return [...prevSelectedSeats, seatNumber];
+      }
+    });
   };
 
   const getQueryParams = () => {
@@ -33,14 +42,14 @@ export default function Booking() {
 
   useEffect(() => {
     getQueryParams();
-  });
+  }, []);
 
   return (
     <div className="container mx-auto">
       <HeaderBar />
-      <div className="flex  flex-col items-center mb-24">
+      <div className="flex flex-col items-center mb-24">
         <h1 className="text-white font-bold text-6xl uppercase">Cinema Room</h1>
-        <div className="w-1/2 bg-slate-700 h5 rounded my-8">
+        <div className="w-1/2 bg-slate-700 h-5 rounded my-8">
           <p className="text-center text-sm text-gray-400 font-bold">SCREEN</p>
         </div>
       </div>
@@ -48,8 +57,12 @@ export default function Booking() {
         numRows={9}
         numSeatsPerRow={14}
         occupiedSeats={occupiedSeats}
+        selectedSeats={selectedSeats} // Pasa el estado de sillas seleccionadas al componente CinemaRoom
         onSeatClick={handleSeatClick}
       />
+      <Cart selectedSeats={selectedSeats} /> {/* Renderiza el componente Cart */}
     </div>
   );
-}
+};
+
+export default Booking;
