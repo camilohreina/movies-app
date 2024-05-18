@@ -1,37 +1,37 @@
-import { Link, useLocation} from 'wouter';
+import { Link, useLocation } from 'wouter';
 import BackButton from '../components/BackButton';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import {database} from "../firebase/config";
+import { database } from '../firebase/config';
 
 export default function Login() {
-
   const [location, setLocation] = useLocation();
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
 
-    signInWithEmailAndPassword(database, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            if (user){
-                console.log("User logged in successfully");
-                setLocation("/")
-            }else{
-                console.log("User not logged in");
-            }
-        })
-}
+    signInWithEmailAndPassword(database, email, password).then(
+      (userCredential) => {
+        const user = userCredential.user;
+        if (user) {
+          console.log('User logged in successfully');
+          setLocation('/');
+        } else {
+          console.log('User not logged in');
+        }
+      }
+    );
+  };
 
-  return (<>
-    <BackButton />
-    
+  return (
+    <>
+      <BackButton />
       <div className="flex flex-col justify-center items-center m-1 p-8 ">
         <div className="m-1 p-16 bg-transparent shadow-lg flex gap-8 my-4 justify-center flex-col items-center rounded border-2 border-gray-700 w-1/2">
           <h1 className="text-white text-3xl uppercase font-bold text-center w-full">
             Login
           </h1>
-          <form onSubmit = {(e) =>handleSubmit(e)} className="w-full px-20">
+          <form onSubmit={(e) => handleSubmit(e)} className="w-full px-20">
             <div className="mb-6">
               <label
                 htmlFor="email"
@@ -101,7 +101,6 @@ export default function Login() {
           </form>
         </div>
       </div>
-    
-  </>
+    </>
   );
 }
