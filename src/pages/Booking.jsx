@@ -5,6 +5,8 @@ import { useSearch } from 'wouter';
 import HeaderBar from '../components/HeaderBar';
 import BookingSummary from '../components/BookingSummary';
 import ConfirmBookingButton from '../components/ConfirmBookingButton';
+import { useDispatch } from 'react-redux';
+import { addBooking } from '../store/slices/booking';
 
 export default function Booking() {
   //const occupiedSeats = [3, 5, 10, 44, 55, 99, 87, 106]; // Indices of occupied seats
@@ -13,7 +15,7 @@ export default function Booking() {
   const queryString = useSearch();
   const [movieId, setMovieId] = useState(null);
   const [time, setTime] = useState(null);
-
+  const dispatch = useDispatch();
   const handleSeatClick = (seatNumber) => {
     setBookingSeats((prev) => {
       if (prev.includes(seatNumber)) {
@@ -38,6 +40,15 @@ export default function Booking() {
     const movie = movies.find((movie) => movie.id == id);
     const bookingSeats = movie.booking[time];
     setOccupiedSeats(bookingSeats);
+  };
+
+  const onAddBooking = () => {
+    const booking = {
+      movieId: movieId,
+      time: time,
+      seats: bookingSeats,
+    };
+    dispatch(addBooking(booking));
   };
 
   useEffect(() => {
@@ -66,7 +77,7 @@ export default function Booking() {
         time={time}
         bookingSeats={bookingSeats}
       />
-      <ConfirmBookingButton />
+      <ConfirmBookingButton onClickFn={onAddBooking} />
     </div>
   );
 }
