@@ -11,10 +11,12 @@ export default function Login() {
     const password = e.target.elements.password.value;
 
     signInWithEmailAndPassword(database, email, password).then(
-      (userCredential) => {
+      async(userCredential) => {
         const user = userCredential.user;
         if (user) {
           console.log('User logged in successfully');
+          const token = await user.getIdToken();
+          localStorage.setItem('token', token);
           setLocation('/');
         } else {
           console.log('User not logged in');
