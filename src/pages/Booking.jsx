@@ -3,16 +3,27 @@ import CinemaRoom from '../components/CinemaRoom';
 import { movies } from '../data/movies.json';
 import { useSearch } from 'wouter';
 import HeaderBar from '../components/HeaderBar';
+import BookingSummary from '../components/BookingSummary';
+import ConfirmBookingButton from '../components/ConfirmBookingButton';
+import { useDispatch } from 'react-redux';
+import { addBooking } from '../store/slices/booking';
 
 export default function Booking() {
   //const occupiedSeats = [3, 5, 10, 44, 55, 99, 87, 106]; // Indices of occupied seats
   const [occupiedSeats, setOccupiedSeats] = useState([]); // Indices of occupied seats
+  const [bookingSeats, setBookingSeats] = useState([]); // Indices of selected seats
   const queryString = useSearch();
-  const [movieId, setMovieId] = useState('');
-  const [time, setTime] = useState('');
-
+  const [movieId, setMovieId] = useState(null);
+  const [time, setTime] = useState(null);
+  const dispatch = useDispatch();
   const handleSeatClick = (seatNumber) => {
-    console.log(`Seat ${seatNumber} was clicked.`);
+    setBookingSeats((prev) => {
+      if (prev.includes(seatNumber)) {
+        return prev.filter((seat) => seat !== seatNumber);
+      } else {
+        return [...prev, seatNumber];
+      }
+    });
     // Here you can implement logic to reserve or release the seat
   };
 
@@ -31,9 +42,19 @@ export default function Booking() {
     setOccupiedSeats(bookingSeats);
   };
 
+  const onAddBooking = () => {
+    const booking = {
+      id: movieId,
+      title: movies.find((movie) => movie.id == movieId).title,
+      time: time,
+      seats: bookingSeats,
+    };
+    dispatch(addBooking(booking));
+  };
+
   useEffect(() => {
     getQueryParams();
-  });
+  }, [occupiedSeats]);
 
   return (
     <div className="container mx-auto">
@@ -48,8 +69,16 @@ export default function Booking() {
         numRows={9}
         numSeatsPerRow={14}
         occupiedSeats={occupiedSeats}
+        bookingSeats={bookingSeats}
         onSeatClick={handleSeatClick}
       />
+
+      <BookingSummary
+        movieId={movieId}
+        time={time}
+        bookingSeats={bookingSeats}
+      />
+      <ConfirmBookingButton onClickFn={onAddBooking} />
     </div>
   );
 }

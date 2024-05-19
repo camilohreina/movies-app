@@ -3,9 +3,16 @@ export default function CinemaRoom({
   numSeatsPerRow,
   occupiedSeats,
   onSeatClick,
+  bookingSeats,
 }) {
-  function Seat({ number, occupied, onClick }) {
-    const color = occupied ? '#db6e6e' : '#2b28d5';
+  function Seat({ number, occupied, selected, onClick }) {
+    let color = '#2b28d5';
+    if (selected) {
+      color = '#5ED854';
+    }
+    if (occupied) {
+      color = '#db6e6e';
+    }
     return (
       <div
         className="w-9 h-9 m-4 cursor-pointer rounded text-sm flex place-items-center place-content-center text-gray-500 font-bold"
@@ -33,11 +40,13 @@ export default function CinemaRoom({
     for (let seat = 1; seat <= numSeatsPerRow; seat++) {
       const seatNumber = row * numSeatsPerRow + seat;
       const occupied = occupiedSeats?.includes(seatNumber);
+      const selected = bookingSeats?.includes(seatNumber);
       seats.push(
         <Seat
           key={seatNumber}
           number={seatNumber}
           occupied={occupied}
+          selected={selected}
           onClick={() => onSeatClick(seatNumber)}
         />
       );

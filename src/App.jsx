@@ -3,9 +3,9 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/Sign-Up';
 import ForgotPassword from './pages/Forgot-password';
-
 import MovieDetail from './pages/MovieDetail';
 import Booking from './pages/Booking';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
       <Route path="/movie/:id" component={MovieDetail} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/booking" component={Booking} />
+      <Route path="/cart" component={Cart} />
     </div>
   );
 }
