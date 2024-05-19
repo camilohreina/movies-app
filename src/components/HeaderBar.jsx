@@ -11,8 +11,8 @@ export default function HeaderBar({
   return (
     <div className="flex flex-row justify-center items-center w-full text-white p-4">
       {showBackButton && <BackButton />}
-      <LoginButton />
-      <CartButton />
+      {showLoginButton && <LoginButton />}
+      {showCartButton && <CartButton />}
     </div>
   );
 }

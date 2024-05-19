@@ -44,7 +44,8 @@ export default function Booking() {
 
   const onAddBooking = () => {
     const booking = {
-      movieId: movieId,
+      id: movieId,
+      title: movies.find((movie) => movie.id == movieId).title,
       time: time,
       seats: bookingSeats,
     };

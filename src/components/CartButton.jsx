@@ -1,13 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'wouter';
 
-CartButton.propTypes = {
-  itemCount: PropTypes.number.isRequired,
-};
-
-export default function CartButton({ itemCount }) {
+export default function CartButton() {
   return (
-    <button
+    <Link
+      href="/cart"
       type="button"
       className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-lg shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
     >
@@ -28,9 +24,6 @@ export default function CartButton({ itemCount }) {
           d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"
         />
       </svg>
-    </button>
+    </Link>
   );
 }
-CartButton.propTypes = {
-  itemCount: PropTypes.number.isRequired,
-};
