@@ -21,8 +21,15 @@ export default function SignUp() {
             return
         }
 
-        createUserWithEmailAndPassword(database, email, password, firstname, lastname).then(data => {
+        createUserWithEmailAndPassword(database, email, password).then(data => {
             console.log(data,"authData");
+            const infoSignIn = {
+                email: data.user.email,
+                firstname: firstname,
+                lastname: lastname
+            };
+            console.log(infoSignIn);
+            localStorage.setItem("infoSignIn", JSON.stringify(infoSignIn));
             setLocation("/login")
         })
     }
