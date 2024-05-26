@@ -24,22 +24,22 @@ export default function Booking() {
         return [...prev, seatNumber];
       }
     });
-    // Here you can implement logic to reserve or release the seat
   };
 
   const getQueryParams = () => {
     const urlParams = new URLSearchParams(queryString);
     const movie = urlParams.get('movie');
-    const time = urlParams.get('time');
+    const urlTime = urlParams.get('time');
+    setTime(urlTime);
     setMovieId(movie);
-    setTime(time);
-    getOccupiedSeats({ id: movie });
   };
 
   const getOccupiedSeats = ({ id }) => {
     const movie = movies.find((movie) => movie.id == id);
     const bookingSeats = movie.booking[time];
-    setOccupiedSeats(bookingSeats);
+    const foundSeats = JSON.parse(localStorage.getItem('booking'))?.filter((seat) => seat.id == id && seat.time == time)[0]?.seats;
+    const finalSeats = foundSeats ? [...bookingSeats, ...foundSeats] : bookingSeats;
+    setOccupiedSeats(finalSeats);
   };
 
   const onAddBooking = () => {
@@ -54,7 +54,14 @@ export default function Booking() {
 
   useEffect(() => {
     getQueryParams();
-  }, [occupiedSeats]);
+  }, []);
+
+  useEffect(() => {
+    if (movieId) {
+      getOccupiedSeats({ id: movieId });
+    }
+  }
+  , [movieId, time]);
 
   return (
     <div className="container mx-auto">

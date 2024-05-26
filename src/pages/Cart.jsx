@@ -51,7 +51,17 @@ export default function Cart() {
                 <button
                   className="bg-gradient-to-br from-purple-500 to-pink-500 text-white font-semibold text-sm rounded-lg py-2.5 px-8 w-full focus:outline-none focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 mt-4 mb-4"
                   onClick={() => {
-                    localStorage.setItem('booking', JSON.stringify(booking));
+                    let existingBookings = JSON.parse(localStorage.getItem('booking')) || [];
+                    
+                    for (let newBooking of booking) {
+                      // Comprueba si la reserva ya existe en 
+                      if (!existingBookings.some(existingBooking => existingBooking.id === newBooking.id)) {
+                        // Si no existe, añade la reserva 
+                        existingBookings.push(newBooking);
+                      }
+                    }
+                    localStorage.setItem('booking', JSON.stringify(existingBookings));
+                    console.log(existingBookings);
                   }}
                 >
                   Confirm booking
