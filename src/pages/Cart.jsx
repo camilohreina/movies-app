@@ -1,12 +1,25 @@
 import HeaderBar from '../components/HeaderBar';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';  
+import { Link } from 'wouter';
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function Cart() {
   const { booking } = useSelector((state) => state.booking);
   const token = localStorage.getItem('token');
   const [infoSignIn, setInfoSignIn] = useState({ firstname: 'default', lastname: 'default', email: 'default' });
   console.log(infoSignIn);
+
+  const notify = () => {
+    toast.success('Booking completed!', {
+      style: {
+        borderRadius: '10px',
+        background: 'black',
+        color: '#fff'
+      },
+      autoClose: 1500, 
+    });
+  }
   
   useEffect(() => {
     if (token) {
@@ -16,6 +29,7 @@ export default function Cart() {
   }, [token]);
 
   return (
+    <>
     <div className="container mx-auto flex flex-col items-center justify-center h-full w-full ">
       <HeaderBar showCartButton={false} />
       <div className="flex flex-col items-center justify-center w-full h-full text-white p-4 border-2 border-white rounded-lg ">
@@ -51,6 +65,7 @@ export default function Cart() {
                 <button
                   className="bg-gradient-to-br from-purple-500 to-pink-500 text-white font-semibold text-sm rounded-lg py-2.5 px-8 w-full focus:outline-none focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 mt-4 mb-4"
                   onClick={() => {
+                    notify();
                     let existingBookings = JSON.parse(localStorage.getItem('booking')) || [];
                     
                     for (let newBooking of booking) {
@@ -68,13 +83,17 @@ export default function Cart() {
                 </button>
               </div>
             ) : (
-              <button className="bg-gradient-to-br from-purple-500 to-pink-500 text-white font-semibold text-sm rounded-lg py-2.5 px-8 w-full focus:outline-none focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 mt-4 mb-4">
-                Need to login
-              </button>
+              <Link href="/login">
+                <button className="bg-gradient-to-br from-purple-500 to-pink-500 text-white font-semibold text-sm rounded-lg py-2.5 px-8 w-full focus:outline-none focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 mt-4 mb-4">
+                  Need to login
+                </button>
+              </Link>
             )}
           </div>
         </div>
       </div>
     </div>
+    <ToastContainer />
+    </>
   );
 }

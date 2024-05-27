@@ -2,11 +2,26 @@ import { Link, useLocation } from 'wouter';
 import BackButton from '../components/BackButton';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { database } from '../firebase/config';
+import {toast, ToastContainer} from 'react-toastify';
 
 export default function Login() {
   const [location, setLocation] = useLocation();
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const notify = () => {
+    toast.success('Login completed!', {
+      style: {
+        borderRadius: '10px',
+        background: 'black',
+        color: '#fff'
+      },
+      autoClose: 1500, 
+    });
+  }
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  notify();
+
+  setTimeout(() => {
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
 
@@ -23,7 +38,8 @@ export default function Login() {
         }
       }
     );
-  };
+  }, 2000); // Delay of 2 seconds
+};
 
   return (
     <>
@@ -64,23 +80,6 @@ export default function Login() {
                 required
               />
             </div>
-            <div className="flex justify-between mt-4">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="rounded text-blue-500 dark:text-blue-400 focus:ring-4 focus:ring-blue-500 dark:focus:ring-blue-500"
-                />
-                <span className="text-sm font-medium text-gray-900 dark:text-white">
-                  Remember me
-                </span>
-              </label>
-              <Link
-                href="/forgot-password"
-                className="text-sm font-medium text-blue-500 dark:text-blue-400"
-              >
-                Forgot password?
-              </Link>
-            </div>
             <div>
               <button
                 type="submit"
@@ -103,6 +102,7 @@ export default function Login() {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
