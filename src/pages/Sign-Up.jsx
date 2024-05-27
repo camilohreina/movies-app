@@ -3,36 +3,50 @@ import {database} from "../firebase/config";
 import BackButton from "../components/BackButton";
 import {createUserWithEmailAndPassword} from "firebase/auth";
 import { data } from "autoprefixer";
+import {toast, ToastContainer} from 'react-toastify';
 
 export default function SignUp() {
 
     const [location, setLocation] = useLocation();
-
+    const notify = () => {
+        toast.success('User created!', {
+          style: {
+            borderRadius: '10px',
+            background: 'black',
+            color: '#fff'
+          },
+          autoClose: 1500, 
+        });
+      }
     const handleSubmit = (e) => {
-        e.preventDefault()
-        const email = e.target.floating_email.value
-        const password = e.target.floating_password.value
-        const repeat_password = e.target.floating_repeat_password.value
-        const firstname = e.target.floating_first_name.value
-        const lastname = e.target.floating_last_name.value
-
-        if (password !== repeat_password) {
-            alert("Passwords do not match")
-            return
-        }
-
-        createUserWithEmailAndPassword(database, email, password).then(data => {
-            console.log(data,"authData");
+        e.preventDefault();
+        notify();
+      
+        setTimeout(() => {
+          const email = e.target.floating_email.value;
+          const password = e.target.floating_password.value;
+          const repeat_password = e.target.floating_repeat_password.value;
+          const firstname = e.target.floating_first_name.value;
+          const lastname = e.target.floating_last_name.value;
+      
+          if (password !== repeat_password) {
+            alert("Passwords do not match");
+            return;
+          }
+      
+          createUserWithEmailAndPassword(database, email, password).then((data) => {
+            console.log(data, "authData");
             const infoSignIn = {
-                email: data.user.email,
-                firstname: firstname,
-                lastname: lastname
+              email: data.user.email,
+              firstname: firstname,
+              lastname: lastname,
             };
             console.log(infoSignIn);
             localStorage.setItem("infoSignIn", JSON.stringify(infoSignIn));
-            setLocation("/login")
-        })
-    }
+            setLocation("/login");
+          });
+        }, 2000); // Delay of 2 seconds
+      };
 
     return (<>
         <BackButton />
@@ -71,6 +85,7 @@ export default function SignUp() {
             </div>
         </div>    
     </form>
+    <ToastContainer />
     </>
     );
 }

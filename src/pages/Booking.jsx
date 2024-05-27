@@ -7,6 +7,7 @@ import BookingSummary from '../components/BookingSummary';
 import ConfirmBookingButton from '../components/ConfirmBookingButton';
 import { useDispatch } from 'react-redux';
 import { addBooking } from '../store/slices/booking';
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function Booking() {
   //const occupiedSeats = [3, 5, 10, 44, 55, 99, 87, 106]; // Indices of occupied seats
