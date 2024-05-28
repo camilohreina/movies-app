@@ -91,12 +91,11 @@ const handleSubmit = (e) => {
             <div className="max-w-lg text-center">
               <p className="text-sm font-medium text-gray-900 dark:text-white">
                 Don't have an account yet?
-                <a
-                  href="/Sign-Up"
-                  className="text-purple-500 hover:text-pink-500 font-semibold text-sm ml-2"
-                >
-                  Sign Up
-                </a>
+                <Link 
+                href="/Sign-Up"
+                className="text-purple-500 hover:text-pink-500 font-semibold text-sm ml-2"
+                  >Sign Up
+                </Link>
               </p>
             </div>
           </form>
