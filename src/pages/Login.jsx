@@ -5,23 +5,23 @@ import { database } from '../firebase/config';
 import {toast, ToastContainer} from 'react-toastify';
 
 export default function Login() {
+
   const [location, setLocation] = useLocation();
-  const notify = () => {
-    toast.success('Login completed!', {
+
+  const notify = (message, type) => {
+    toast[type](message, {
       style: {
         borderRadius: '10px',
         background: 'black',
         color: '#fff'
       },
-      autoClose: 1500, 
-    });
-  }
+      autoClose: 1500, 
+    });
+  };
 
 const handleSubmit = (e) => {
   e.preventDefault();
-  notify();
-
-  setTimeout(() => {
+  
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
 
@@ -32,13 +32,22 @@ const handleSubmit = (e) => {
           console.log('User logged in successfully');
           const token = await user.getIdToken();
           localStorage.setItem('token', token);
-          setLocation('/');
+          notify('Login completed!', 'success');
+          setTimeout(() => {
+            const prevLocation = localStorage.getItem('prevLocation');
+            setLocation(prevLocation || '/');
+          }, 2000);
+          
         } else {
           console.log('User not logged in');
+          setTimeout(() => notify('Login failed!', 'error'), 1000);
         }
       }
-    );
-  }, 2000); // Delay of 2 seconds
+    ).catch((error) => {
+      console.error('Error logging in:', error);
+      setTimeout(() => notify('Login failed!', 'error'), 1000);
+    });
+
 };
 
   return (

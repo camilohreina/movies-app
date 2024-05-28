@@ -1,4 +1,4 @@
-import { useParams } from 'wouter';
+import { useParams} from 'wouter';
 import { movies } from '../data/movies.json';
 import AboutMovie from '../components/AboutMovie';
 import Schedule from '../components/Schedule';
