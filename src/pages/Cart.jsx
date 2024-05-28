@@ -1,14 +1,14 @@
 import HeaderBar from '../components/HeaderBar';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';  
-import { Link } from 'wouter';
+import { Link, useLocation} from 'wouter';
 import { toast, ToastContainer } from 'react-toastify';
 
 export default function Cart() {
   const { booking } = useSelector((state) => state.booking);
   const token = localStorage.getItem('token');
   const [infoSignIn, setInfoSignIn] = useState({ firstname: 'default', lastname: 'default', email: 'default' });
-  console.log(infoSignIn);
+  const [location, setLocation] = useLocation();
 
   const notify = () => {
     toast.success('Booking completed!', {
@@ -18,8 +18,8 @@ export default function Cart() {
         color: '#fff'
       },
       autoClose: 1500, 
-    });
-  }
+    });
+  }
   
   useEffect(() => {
     if (token) {
@@ -76,6 +76,7 @@ export default function Cart() {
                       }
                     }
                     localStorage.setItem('booking', JSON.stringify(existingBookings));
+                    localStorage.removeItem('prevLocation');
                     console.log(existingBookings);
                   }}
                 >
@@ -83,7 +84,13 @@ export default function Cart() {
                 </button>
               </div>
             ) : (
-              <Link href="/login">
+              <Link href="/login"
+                    onClick={() => {
+                      // Almacena la ubicación actual en el almacenamiento local
+                      localStorage.setItem('prevLocation', location);
+                      setLocation('/login');
+                    }}
+              >
                 <button className="bg-gradient-to-br from-purple-500 to-pink-500 text-white font-semibold text-sm rounded-lg py-2.5 px-8 w-full focus:outline-none focus:ring-4 focus:ring-purple-200 dark:focus:ring-purple-800 mt-4 mb-4">
                   Need to login
                 </button>
