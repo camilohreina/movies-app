@@ -1,3 +1,4 @@
+import AboutButton from './AboutButton';
 import BackButton from './BackButton';
 import CartButton from './CartButton';
 import LoginButton from './LoginButton';
@@ -9,9 +10,12 @@ export default function HeaderBar({
   showLoginButton = true,
 }) {
   return (
-    <div className="flex flex-row justify-center items-center w-full text-white p-4">
+    <div className="flex flex-row justify-between items-center w-full text-white p-4">
       {showBackButton && <BackButton />}
-      {showLoginButton && <LoginButton />}
+      <div>
+        {showLoginButton && <LoginButton />}
+        <AboutButton />
+      </div>
       {showCartButton && <CartButton />}
     </div>
   );

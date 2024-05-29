@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 2,
+      "name": "Juan Diego Cortes Murillo",
+      "role": "Frontend Developer",
+      "image": "diego.jpeg"
+    },
+    {
+      "id": 1,
+      "name": "Camilo Hernández",
+      "role": "Frontend Developer",
+      "image": "camilo.webp"
+    },
+    {
+      "id": 3,
+      "name": "Juan David Borrero Gómez",
+      "role": "Designer & Developer",
+      "image": "david.webp"
+    }
+  ]
+}
