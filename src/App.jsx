@@ -5,6 +5,7 @@ import SignUp from './pages/Sign-Up';
 import MovieDetail from './pages/MovieDetail';
 import Booking from './pages/Booking';
 import Cart from './pages/Cart';
+import AboutUs from './pages/AboutUs';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Route path="/movie/:id" component={MovieDetail} />
       <Route path="/booking" component={Booking} />
       <Route path="/cart" component={Cart} />
+      <Route path="/about" component={AboutUs} />
     </div>
   );
 }
